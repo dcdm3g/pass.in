@@ -1,4 +1,5 @@
 import fastify from 'fastify'
+import cors from '@fastify/cors'
 import swagger from '@fastify/swagger'
 import swaggerUI from '@fastify/swagger-ui'
 import {
@@ -14,6 +15,10 @@ import { checkIn } from './routes/check-in'
 import { getEventAttendees } from './routes/get-event-attendees'
 
 const app = fastify()
+
+app.register(cors, {
+  origin: '*',
+})
 
 app.register(swagger, {
   swagger: {
@@ -43,6 +48,7 @@ app.register(getEventAttendees)
 app
   .listen({
     port: 3333,
+    host: '0.0.0.0',
   })
   .then((address) => {
     console.log(`HTTP Server Running on ${address}`)
