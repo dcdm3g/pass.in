@@ -18,7 +18,7 @@ export async function getAttendeeBadge(app: FastifyInstance) {
               checkInURL: z.string().url(),
             }),
           }),
-          404: z.object({ message: z.string() }),
+          404: z.object({ message: z.literal('Attendee not found') }),
         },
       },
     },

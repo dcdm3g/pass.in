@@ -12,9 +12,9 @@ export async function registerForEvent(app: FastifyInstance) {
         body: z.object({ name: z.string().min(4), email: z.string().email() }),
         response: {
           201: z.object({ attendeeId: z.number().int().positive() }),
-          404: z.object({ message: z.string() }),
-          403: z.object({ message: z.string() }),
-          409: z.object({ message: z.string() }),
+          404: z.object({ message: z.literal('Event not found') }),
+          403: z.object({ message: z.literal('Vacancies sold out') }),
+          409: z.object({ message: z.literal('Email already in use') }),
         },
       },
     },

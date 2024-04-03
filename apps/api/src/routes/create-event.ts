@@ -19,7 +19,7 @@ export async function createEvent(app: FastifyInstance) {
             eventId: z.string().uuid(),
           }),
           409: z.object({
-            message: z.string(),
+            message: z.literal('Slug already in use'),
           }),
         },
       },
