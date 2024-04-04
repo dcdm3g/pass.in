@@ -1,6 +1,7 @@
 'use client'
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+import { useDebouncedCallback } from 'use-debounce'
 import { Search as SearchIcon } from 'lucide-react'
 
 export function Search() {
@@ -8,7 +9,7 @@ export function Search() {
   const pathname = usePathname()
   const router = useRouter()
 
-  function handleSearch(search: string) {
+  const handleSearch = useDebouncedCallback((search: string) => {
     const query = new URLSearchParams(searchParams)
     query.set('page', '1')
 
@@ -19,7 +20,7 @@ export function Search() {
     }
 
     router.replace(`${pathname}?${query.toString()}`)
-  }
+  }, 300)
 
   return (
     <div className="flex w-72 items-center gap-3 rounded-lg border border-white/10 px-3 py-1.5">
