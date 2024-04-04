@@ -29,6 +29,7 @@ export async function getEventAttendees(app: FastifyInstance) {
                 checkedInAt: z.date().nullable(),
               }),
             ),
+            total: z.number().int().nonnegative(),
           }),
           404: z.object({ message: z.literal('Event not found') }),
         },
@@ -41,6 +42,9 @@ export async function getEventAttendees(app: FastifyInstance) {
       const event = await prisma.event.findUnique({
         where: { id },
         select: {
+          _count: {
+            select: { attendees: true },
+          },
           attendees: {
             where: search
               ? {
@@ -66,7 +70,7 @@ export async function getEventAttendees(app: FastifyInstance) {
         return reply.status(404).send({ message: 'Event not found' })
       }
 
-      return { attendees: event.attendees }
+      return { attendees: event.attendees, total: event._count.attendees }
     },
   )
 }
