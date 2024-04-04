@@ -43,7 +43,17 @@ export async function getEventAttendees(app: FastifyInstance) {
         where: { id },
         select: {
           _count: {
-            select: { attendees: true },
+            select: {
+              attendees: {
+                where: search
+                  ? {
+                      name: {
+                        contains: search,
+                      },
+                    }
+                  : undefined,
+              },
+            },
           },
           attendees: {
             where: search
