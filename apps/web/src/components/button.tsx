@@ -14,7 +14,7 @@ export function Button({
     <button
       data-transparent={transparent}
       className={twMerge(
-        'rounded-md border border-white/10 bg-white/10 p-1.5 data-[transparent=true]:bg-black/20',
+        'rounded-md border border-white/10 bg-white/10 p-1.5 disabled:opacity-50 data-[transparent=true]:bg-black/20',
         className,
       )}
       {...rest}

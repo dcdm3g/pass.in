@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Metadata } from 'next'
+import { setDefaultOptions } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { ReactNode } from 'react'
 import { Header } from '@/components/header'
 import './globals.css'
 
@@ -10,11 +13,13 @@ export const metadata: Metadata = {
   description: 'A participant management application for in-person events.',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+setDefaultOptions({ locale: ptBR })
+
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-br">
       <body className={`${inter.className} bg-zinc-950 text-zinc-50`}>
