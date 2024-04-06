@@ -22,7 +22,7 @@ jobs:
     
     - name: Build docker image
       run: >
-        docker build
+        docker build .
         -f apps/api/Dockerfile
         -t dcdm3g/pass-in-api:${{ steps.generate_sha.outputs.sha }}
 
