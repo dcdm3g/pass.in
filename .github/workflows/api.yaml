@@ -35,4 +35,6 @@ jobs:
     - name: Push image
       run: |
         docker push dcdm3g/pass-in-api:${{ steps.generate_sha.outputs.sha }}
+        docker tag dcdm3g/pass-in-api:${{ steps.generate_sha.outputs.sha }} dcdm3g/pass-in-api:latest
+        docker push dcdm3g/pass-in-api:latest
 
